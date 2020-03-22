@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  db:
+    container_name: db
+    image: postgres
+  web:
+    container_name: web
+    build: .
+    command: python manage.py runserver 0.0.0.0:7007
+    volumes:
+      - .:/code
+      -  /var/run/docker.sock:/var/run/docker.sock
+      -  /usr/bin:/usr/bin
+      - ./tensorflow/:/tf/tensorflow/
+    ports:
+      - "7007:7007"
+    depends_on:
+      - db      
+  
+  tensorflow:
+    container_name: tensorflow
+    network_mode: host
+    build:
+      context: .
+      dockerfile: tensorflow.dockerfile
+    image: docker_tensorflow
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./tensorflow/:/tf/tensorflow/

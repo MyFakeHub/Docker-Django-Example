@@ -1,0 +1,10 @@
+tmp/
+tutorial/
+tensorflow/euclidean*
+tensorflow/non*
+tensorflow/vas*
+tensorflow/result*
+tensorflow/TEST*
+analytics/__pycache__
+service_recommendation/__pycache__
+service_recommendation/results_files/
